@@ -14,7 +14,7 @@ export ARCHFLAGS="-arch x86_64"
 
 export EDITOR="vim"
 
-PATH="/Users/oskar/opt/play-1.2.2:/Users/oskar/bin:/usr/local/bin:Users/oskar/opt/bin:/usr/local/Cellar/gettext/0.18.1.1/bin:/usr/local/sbin:"$PATH
+PATH="/Users/oskar/opt/play-1.2.2:/Users/oskar/bin:/usr/local/bin:Users/oskar/opt/bin:/usr/local/Cellar/gettext/0.18.1.1/bin:/usr/local/sbin:/Users/oskar/node_modules/.bin:"$PATH
 
 PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 

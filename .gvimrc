@@ -20,6 +20,7 @@ set nowrap
 set number
 set ruler
 set scrolloff=7
+set colorcolumn=81
 
 " GUI specific
 if has("gui_running")
