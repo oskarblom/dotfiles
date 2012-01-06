@@ -1,6 +1,7 @@
 " Pathogen
 call pathogen#infect()
 call pathogen#helptags()
+
 " Indentation
 set tabstop=8
 set softtabstop=4
@@ -55,8 +56,6 @@ if has("gui_running")
     endif
     " Autocommand
     if has("autocmd")
-        autocmd FileType java set omnifunc=javacomplete#Complete
-        autocmd FileType java set completefunc=javacomplete#CompleteParamsInfo
         autocmd FileType python set omnifunc=pythoncomplete#Complete
         autocmd FileType python set makeprg=pychecker\ %
         autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
@@ -83,6 +82,7 @@ set showmatch
 " Nerdtree
 "let NERDTreeDirArrows=1
 "let NERDTreeMinimalUI=1
+
 " Tlist
 let Tlist_Close_On_Select = 1
 let Tlist_GainFocus_On_ToggleOpen = 1
@@ -98,8 +98,8 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 map <leader>t <C-]>
 map <leader>l g]
-nnoremap <tab> :bNext <CR>
-nnoremap <S-tab> :bprevious <CR>
+"nnoremap <tab> :bNext <CR>
+"nnoremap <S-tab> :bprevious <CR>
 
 set listchars=tab:⇒\ ,eol:↵
 
@@ -114,3 +114,5 @@ set omnifunc=syntaxcomplete#Complete
 set wildmenu
 set showcmd
 set backspace=indent,eol,start
+set ttyfast
+set ssop-=options "Don't store setting values in the session
