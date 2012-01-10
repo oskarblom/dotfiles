@@ -1,3 +1,6 @@
+" Should be first
+set nocompatible
+
 " Pathogen
 call pathogen#infect()
 call pathogen#helptags()
@@ -105,7 +108,6 @@ set listchars=tab:⇒\ ,eol:↵
 
 " Misc
 set encoding=utf-8
-set nocompatible
 set hidden
 set title
 let python_highlight_all=1
