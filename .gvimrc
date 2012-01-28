@@ -16,8 +16,8 @@ filetype on
 filetype indent plugin on
 
 " Looks
+let g:molokai_original=1
 colorscheme molokai
-set background=dark
 syntax on
 set cursorline
 set nowrap
