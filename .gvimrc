@@ -49,9 +49,10 @@ if has("gui_running")
         noremap <D-S-right> gt
         noremap <D-S-left> gT
     else
+        " Win
         set columns=140
         set lines=46
-        set guifont=Lucida_Console:h11:cANSI
+        set guifont=Consolas:h14
         set guioptions-=m
         set guioptions-=T
         set guioptions-=r
@@ -101,8 +102,8 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 map <leader>t <C-]>
 map <leader>l g]
-"nnoremap <tab> :bNext <CR>
-"nnoremap <S-tab> :bprevious <CR>
+nnoremap <tab> :bNext <CR>
+nnoremap <S-tab> :bprevious <CR>
 
 set listchars=tab:⇒\ ,eol:↵
 
