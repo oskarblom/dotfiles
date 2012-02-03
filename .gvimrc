@@ -119,3 +119,13 @@ set showcmd
 set backspace=indent,eol,start
 set ttyfast
 set ssop-=options "Don't store setting values in the session
+
+"functions
+command! -nargs=* Settab call Stab()
+function! Stab()
+  let l:tabstop = 1 * input("set softtabstop = shiftwidth = ")
+  if l:tabstop > 1
+    let &l:sts = l:tabstop
+    let &l:sw = l:tabstop
+  endif
+endfunction
