@@ -104,6 +104,7 @@ map <leader>t <C-]>
 map <leader>l g]
 nnoremap <tab> :bNext <CR>
 nnoremap <S-tab> :bprevious <CR>
+nnoremap Y y$
 
 set listchars=tab:⇒\ ,eol:↵
 
