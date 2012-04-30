@@ -9,7 +9,7 @@ alias grep="grep --color=auto"
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 
-export PS1="\u@\h:\w\$ "
+export PS1="\[\033[G\]\u@\h:\w\$ "
 
 export ARCHFLAGS="-arch x86_64"
 
