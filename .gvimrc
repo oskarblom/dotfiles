@@ -86,6 +86,8 @@ set showmatch
 " Nerdtree
 let NERDTreeDirArrows=1
 let NERDTreeMinimalUI=1
+let NERDTreeShowBookmarks=1
+map <F10> :NERDTreeToggle<CR>
 
 " Tlist
 let Tlist_Close_On_Select = 1
@@ -105,7 +107,6 @@ map <leader>l g]
 nnoremap <tab> :bNext <CR>
 nnoremap <S-tab> :bprevious <CR>
 nnoremap Y y$
-map <F10> :NERDTreeToggle<CR>
 
 set listchars=tab:⇒\ ,eol:↵
 
