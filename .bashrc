@@ -8,9 +8,10 @@ alias grep="grep --color=auto"
 
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+#export LSCOLORS=Bxgxfxfxcxdxdxhbadbxbx
 
-export PS1="\u@\h:\w\$ "
-
+#export PS1="\u@\h:\w\$ "
+export PS1="\[\033[38;5;110m\]\u\[\033[0m\]@\[\033[38;5;192m\]\h\[\033[0m\]:\[\033[38;5;208m\]\w\[\033[0m\]\$ "
 export ARCHFLAGS="-arch x86_64"
 
 export EDITOR="vim"
@@ -24,3 +25,7 @@ PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 [[ -s "/Users/oskar/.rvm/scripts/rvm" ]] && source "/Users/oskar/.rvm/scripts/rvm"
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+export WORKON_HOME=~/.virtualenvs
+[[ -s "/usr/local/bin/virtualenvwrapper.sh" ]] && source "/usr/local/bin/virtualenvwrapper.sh"
+
