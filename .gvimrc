@@ -1,6 +1,9 @@
 " Should be first
 set nocompatible
 
+"Colors
+set t_Co=256
+
 " Pathogen
 call pathogen#infect()
 call pathogen#helptags()
@@ -88,6 +91,7 @@ let NERDTreeDirArrows=1
 let NERDTreeMinimalUI=1
 let NERDTreeShowBookmarks=1
 map <F10> :NERDTreeToggle<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
 
 " Tlist
 let Tlist_Close_On_Select = 1
