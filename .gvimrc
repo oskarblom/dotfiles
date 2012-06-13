@@ -64,7 +64,8 @@ if has("gui_running")
     " Autocommand
     if has("autocmd")
         autocmd FileType python set omnifunc=pythoncomplete#Complete
-        autocmd FileType python set makeprg=pychecker\ %
+        autocmd FileType python set makeprg=pylint\ --reports=n\ --output-format=parseable\ %:p
+        autocmd FileType python set errorformat=%f:%l:\ %m
         autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
         autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
         autocmd FileType css set omnifunc=csscomplete#CompleteCSS
@@ -90,6 +91,7 @@ set showmatch
 let NERDTreeDirArrows=1
 let NERDTreeMinimalUI=1
 let NERDTreeShowBookmarks=1
+let NERDTreeIgnore = ['\.pyc$']
 map <F10> :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
 
