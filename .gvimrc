@@ -68,6 +68,7 @@ if has("gui_running")
         autocmd FileType python set errorformat=%f:%l:\ %m
         autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
         autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+        autocmd FileType html map <F5> :call Browse()<CR>
         autocmd FileType css set omnifunc=csscomplete#CompleteCSS
         autocmd FileType c set omnifunc=ccomplete#Complete
         autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
@@ -132,9 +133,13 @@ set ssop-=options "Don't store setting values in the session
 "functions
 command! -nargs=* Settab call Stab()
 function! Stab()
-  let l:tabstop = 1 * input("set softtabstop = shiftwidth = ")
-  if l:tabstop > 1
-    let &l:sts = l:tabstop
-    let &l:sw = l:tabstop
-  endif
+    let l:tabstop = 1 * input("set softtabstop = shiftwidth = ")
+    if l:tabstop > 1
+        let &l:sts = l:tabstop
+        let &l:sw = l:tabstop
+    endif
+endfunction
+
+function! Browse()
+    silent !open -a Google\ Chrome % 
 endfunction
