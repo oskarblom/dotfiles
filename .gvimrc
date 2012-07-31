@@ -54,11 +54,12 @@ if has("gui_running")
     else
         " Win
         set columns=140
-        set lines=46
-        set guifont=Consolas:h14
+        set lines=36
+        set guifont=Consolas:h13
         set guioptions-=m
         set guioptions-=T
         set guioptions-=r
+        set guioptions-=L
         :cd c:\Users\oskar.blom
     endif
     " Autocommand
@@ -111,8 +112,6 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 map <leader>t <C-]>
 map <leader>l g]
-nnoremap <tab> :bNext <CR>
-nnoremap <S-tab> :bprevious <CR>
 nnoremap Y y$
 
 set listchars=tab:⇒\ ,eol:↵
