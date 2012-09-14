@@ -69,7 +69,7 @@ if has("gui_running")
         autocmd FileType python set errorformat=%f:%l:\ %m
         autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
         autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-        autocmd FileType html map <F5> :call Browse()<CR>
+        autocmd FileType html map <F5> :silent call Browse()<CR>
         autocmd FileType css set omnifunc=csscomplete#CompleteCSS
         autocmd FileType c set omnifunc=ccomplete#Complete
         autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete

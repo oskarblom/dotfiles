@@ -5,6 +5,7 @@ fi
 alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 alias vi="vim"
 alias grep="grep --color=auto"
+alias less="less -I"
 
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
