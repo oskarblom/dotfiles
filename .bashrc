@@ -21,7 +21,10 @@ PATH="/Users/oskar/bin:/Users/oskar/opt/node/bin:/usr/local/bin:/usr/local/Cella
 
 PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
 
-. /Users/oskar/opt/django_bash_completion
+
+if [ -f /Users/oskar/opt/django_bash_completion ]; then
+    . /Users/oskar/opt/django_bash_completion
+fi
 
 [[ -s "/Users/oskar/.rvm/scripts/rvm" ]] && source "/Users/oskar/.rvm/scripts/rvm"
 
