@@ -2,7 +2,7 @@ if [ -f `brew --prefix`/etc/bash_completion ]; then
     . `brew --prefix`/etc/bash_completion
 fi
 
-set -o vi
+#set -o vi
 
 alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 alias vi="vim"
