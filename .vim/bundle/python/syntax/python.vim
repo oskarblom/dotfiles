@@ -1,13 +1,13 @@
 " Vim syntax file
-" Language:	Python
-" Maintainer:	Dmitry Vasiliev <dima@hlabs.spb.ru>
-" URL:		http://www.hlabs.spb.ru/vim/python.vim
-" Last Change:	2010-04-09
+" Language:     Python
+" Maintainer:	Dmitry Vasiliev <dima at hlabs dot org>
+" URL:		    https://github.com/hdima/vim-scripts/blob/master/syntax/python/python.vim
+" Last Change:	2012-02-11
 " Filenames:	*.py
-" Version:	2.6.6
+" Version:	    2.6.7
 "
 " Based on python.vim (from Vim 6.1 distribution)
-" by Neil Schemenauer <nas@python.ca>
+" by Neil Schemenauer <nas at python dot ca>
 "
 " Thanks:
 "
@@ -78,7 +78,7 @@ if version < 600
 elseif exists("b:current_syntax")
   finish
 endif
-let python_highlight_all = 1
+
 if exists("python_highlight_all") && python_highlight_all != 0
   " Not override previously set options
   if !exists("python_highlight_builtins")
