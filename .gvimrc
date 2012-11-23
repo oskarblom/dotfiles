@@ -80,8 +80,14 @@ else
     set noeb vb t_vb=
 endif
 
-set backupdir=~/.vim/.backup
-set directory=~/.vim/.swap
+if has("mac") || has("unix")
+    set backupdir=~/.vim/.backup
+    set directory=~/.vim/.swap
+elseif has("win32") || has("win32")
+    set backupdir=~/vimfiles/_backup
+    set directory=~/vimfiles/_swap
+endif
+
 
 " Search
 set ignorecase
