@@ -14,8 +14,6 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 set autoindent
-set smartindent
-filetype on
 filetype indent plugin on
 
 " Looks
@@ -40,6 +38,8 @@ if has("gui_running")
         set guifont=Monaco:h14
         set columns=130
         set lines=35
+        set backupdir=~/.vim/backup
+        set directory=~/.vim/swap
         noremap <D-1> 1gt
         noremap <D-2> 2gt
         noremap <D-3> 3gt
