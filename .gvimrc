@@ -135,6 +135,7 @@ set showcmd
 set backspace=indent,eol,start
 set ttyfast
 set ssop-=options "Don't store setting values in the session
+set noesckeys
 
 "functions
 command! -nargs=* Settab call Stab()
@@ -149,3 +150,6 @@ endfunction
 function! Browse()
     silent !open -a Google\ Chrome % 
 endfunction
+
+":%s/^\s*/&&/g
+
