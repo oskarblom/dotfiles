@@ -78,6 +78,8 @@ if has("autocmd")
     autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
     autocmd FileType javascript let s:commentprefix = '//'
 
+    autocmd FileType vim let s:commentprefix = '"'
+
     autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 
     autocmd FileType css set omnifunc=csscomplete#CompleteCSS
@@ -176,14 +178,14 @@ function! CommentRegion(l1, l2)
     if exists(s:commentprefix) != 0 || s:commentprefix == ""
         echoerr "Comment prefix not set or empty for current filetype"
     endif
-    exec a:l1 . "," . a:l2 . 's/^.\(.*\)/' . escape(s:commentprefix, '/"') . '\1'
+    exec a:l1 . "," . a:l2 . 's/^/' . escape(s:commentprefix, '/"')
 endfunction
 
 function! UnCommentRegion(l1, l2)
     if exists(s:commentprefix) != 0 || s:commentprefix == ""
         echoerr "Comment prefix not set or empty for current filetype"
     endif
-    exec a:l1 . "," . a:l2 's/^' . escape(s:commentprefix, '/"') . '/ /'
+    exec a:l1 . "," . a:l2 's/^' . escape(s:commentprefix, '/"') . '//'
 endfunction
 
 " Commands
