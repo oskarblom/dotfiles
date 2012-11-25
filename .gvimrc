@@ -6,7 +6,7 @@ set t_Co=256
 
 " Pathogen
 call pathogen#infect()
-call pathogen#helptags()
+"call pathogen#helptags()
 
 " Indentation
 set tabstop=8
@@ -58,27 +58,39 @@ if has("gui_running")
         set guioptions-=T
         set guioptions-=r
         set guioptions-=L
-        :cd c:\Users\oskar.blom
+        :cd "c:\Users\oskar.blom"
     endif
+
     " Autocommand
-    if has("autocmd")
-        autocmd FileType python set omnifunc=pythoncomplete#Complete
-        autocmd FileType python set makeprg=pylint\ --reports=n\ --output-format=parseable\ %:p
-        autocmd FileType python set errorformat=%f:%l:\ %m
-        autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-        autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-        autocmd FileType html map <F5> :silent call Browse()<CR>
-        autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-        autocmd FileType c set omnifunc=ccomplete#Complete
-        autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-        autocmd GUIEnter * set visualbell t_vb=
-    endif
     " Disable sound and bell
     set vb t_vb=
 else
     " Disable sound and bell
     set noeb vb t_vb=
 endif
+
+if has("autocmd")
+    autocmd FileType python set makeprg="pylint\ --reports=n\ --output-format=parseable\ %:p"
+    autocmd FileType python set omnifunc=pythoncomplete#Complete
+    autocmd FileType python set errorformat="%f:%l:\ %m"
+    autocmd FileType python let s:commentprefix = "#"
+
+    autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+
+    autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+
+    autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+
+    autocmd FileType c set omnifunc=ccomplete#Complete
+
+    autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+
+    autocmd FileType snippet setlocal noexpandtab
+    autocmd FileType snippet setlocal softtabstop=8
+
+    autocmd GUIEnter * set visualbell t_vb=
+endif
+
 
 if has("mac") || has("unix")
     set backupdir=~/.vim/.backup
@@ -110,16 +122,29 @@ let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Inc_Winwidth = 0
 
 " Mappings
+set timeoutlen=5000
 let mapleader = ","
-nnoremap <F8> :set list! <CR>
 map <F7> :TlistToggle<CR>
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
-map <leader>t <C-]>
-map <leader>l g]
+nnoremap <leader>to <C-]>
+nnoremap <leader>tl g]
 nnoremap Y y$
+nnoremap D d$
+"TODO: clean up
+nnoremap H ^
+nnoremap L $
+vnoremap H ^
+vnoremap L $
+snoremap H ^
+snoremap L $
+onoremap H ^
+onoremap L $
+nnoremap * *<C-o>
+vnoremap <silent><leader>c :CommentReg<CR>
+vnoremap <silent><leader>u :UnCommentReg<CR>
 
 set listchars=tab:⇒\ ,eol:↵
 
@@ -137,7 +162,34 @@ set ttyfast
 set ssop-=options "Don't store setting values in the session
 set noesckeys
 
-"functions
+
+function GetSelection()
+    let l:cursorpos = getpos(".")
+    let l:startpos = getpos("v")
+    let l:endpos = getpos("'>")
+endfunction
+
+" Comment region
+command! -nargs=* -range CommentReg call CommentRegion(<line1>, <line2>)
+command! -nargs=* -range UnCommentReg call UnCommentRegion(<line1>, <line2>)
+
+function! CommentRegion(l1, l2)
+    if exists(s:commentprefix) != 0 || s:commentprefix == ""
+        echoerr "Comment prefix not set or empty for current filetype"
+    endif
+    exec a:l1 . "," . a:l2 . 's/^.\(.*\)/' . s:commentprefix . '\1'
+endfunction
+
+function! UnCommentRegion(l1, l2)
+    if exists(s:commentprefix) != 0 || s:commentprefix == ""
+        echoerr "Comment prefix not set or empty for current filetype"
+    endif
+    exec a:l1 . "," . a:l2 's/^' . s:commentprefix . '/ /'
+endfunction
+
+" Commands
+
+" Change the current tabwidth
 command! -nargs=* Settab call Stab()
 function! Stab()
     let l:tabstop = 1 * input("set softtabstop = shiftwidth = ")
@@ -147,9 +199,18 @@ function! Stab()
     endif
 endfunction
 
-function! Browse()
-    silent !open -a Google\ Chrome % 
+" Add a custom snippet for the current filetype
+command! -nargs=* AddSnippet call ASnippet()
+function! ASnippet()
+    let l:currft = &ft
+    if l:currft != ""
+        let l:snippath = $HOME . '/.vim/snippets/' . l:currft . '.snippets'
+        exec ":e " . l:snippath
+        :normal G
+    else
+        echoerr "No filetype associated with current file"
+    endif
 endfunction
 
 ":%s/^\s*/&&/g
-
+"map-operator for custom command with motions
