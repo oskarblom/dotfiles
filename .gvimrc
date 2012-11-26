@@ -14,7 +14,6 @@ set autoindent
 filetype indent plugin on
 
 " Looks
-set t_Co=256
 let g:molokai_original=1
 colorscheme molokai
 syntax on
@@ -59,10 +58,17 @@ if has("gui_running")
         set guioptions-=r
         set guioptions-=L
     endif
+    set t_Co=256
 
     " Disable sound and bell
     set vb t_vb=
 else
+    let s:term = $TERM
+    if $TERM == "xterm-256color"
+        set t_Co=256
+    else
+        set t_Co=8
+    endif
     " Disable sound and bell
     set noeb vb t_vb=
 endif
