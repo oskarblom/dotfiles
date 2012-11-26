@@ -1,4 +1,4 @@
-" Should be first
+﻿" Should be first
 set nocompatible
 
 "Colors
@@ -146,7 +146,7 @@ vmap <leader>u :UnCommentReg<CR>
 "onoremap <silent><leader>c :CommentReg<CR>
 "onoremap <silent><leader>u :UnCommentReg<CR>
 
-set listchars=tab:?\ ,eol:?
+set listchars=tab:⇒\ ,eol:↵
 
 " Misc
 set encoding=utf-8
