@@ -23,6 +23,8 @@ set number
 set ruler
 set scrolloff=7
 set colorcolumn=81
+set laststatus=2   " Always show the statusline
+set fillchars=vert:‖
 
 " GUI specific
 if has("gui_running")
