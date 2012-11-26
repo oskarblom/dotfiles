@@ -1,9 +1,6 @@
 ﻿" Should be first
 set nocompatible
 
-"Colors
-set t_Co=256
-
 " Pathogen
 call pathogen#infect()
 "call pathogen#helptags()
@@ -17,6 +14,7 @@ set autoindent
 filetype indent plugin on
 
 " Looks
+set t_Co=256
 let g:molokai_original=1
 colorscheme molokai
 syntax on
@@ -29,10 +27,12 @@ set colorcolumn=81
 
 " GUI specific
 if has("gui_running")
+    " Linux
     if has("gui_gtk2")
         set guifont=Monospace\ 10
         set columns=100
         set lines=30
+    " Windows
     elseif has("gui_macvim")
         set guioptions=egmrt
         set guifont=Monaco:h14
@@ -60,13 +60,15 @@ if has("gui_running")
         set guioptions-=L
     endif
 
-    " Autocommand
     " Disable sound and bell
     set vb t_vb=
 else
     " Disable sound and bell
     set noeb vb t_vb=
 endif
+
+
+"Autocommands
 
 if has("autocmd")
     autocmd FileType python set makeprg="pylint\ --reports=n\ --output-format=parseable\ %:p"
@@ -93,6 +95,7 @@ if has("autocmd")
     autocmd GUIEnter * set visualbell t_vb=
 endif
 
+" OS
 
 if has("mac") || has("unix")
     set backupdir=~/.vim/.backup
@@ -105,6 +108,7 @@ endif
 
 
 " Search
+
 set ignorecase
 set smartcase
 set hlsearch
@@ -112,6 +116,7 @@ set incsearch
 set showmatch
 
 " Nerdtree
+
 let NERDTreeDirArrows=1
 let NERDTreeMinimalUI=1
 let NERDTreeShowBookmarks=1
@@ -120,14 +125,17 @@ map <F10> :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
 
 " Tlist
+
 let Tlist_Close_On_Select = 1
 let Tlist_GainFocus_On_ToggleOpen = 1
 let Tlist_Inc_Winwidth = 0
 
 " Mappings
+
 set timeoutlen=5000
 let mapleader = ","
 map <F7> :TlistToggle<CR>
+"Window movement
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
@@ -141,10 +149,13 @@ noremap L $
 nnoremap * *<C-o>
 vmap <leader>c :CommentReg<CR>
 vmap <leader>u :UnCommentReg<CR>
-"omap <leader>c :CommentReg<CR>
-"omap <leader>u :UnCommentReg<CR>
-"onoremap <silent><leader>c :CommentReg<CR>
-"onoremap <silent><leader>u :UnCommentReg<CR>
+" PCRE
+noremap / /\v
+
+" Abbreviations
+
+"Open the quickfix window on top like everything else.
+:cnoreabbrev copen topleft copen
 
 set listchars=tab:⇒\ ,eol:↵
 
@@ -173,7 +184,33 @@ endfunction
 command! -nargs=* -range CommentReg call CommentRegion(<line1>, <line2>)
 command! -nargs=* -range UnCommentReg call UnCommentRegion(<line1>, <line2>)
 
+
+" Paren matching
+
+inoremap ( <c-r>=Parenmatch('(')<cr>
+
+let s:parenmap = {'(': ')', '[': ']', '{': '}'}
+
+for p in keys(s:parenmap)
+    exec("inoremap " . p . " \<c-r>=Parenmatch('" . p . "')\<cr>")
+endfor
+
+function Parenmatch(paren)
+    if !has_key(s:parenmap, a:paren)
+	return a:paren
+    endif
+    let l:currpos = getpos(".")
+    :normal %
+    let l:matchpos = getpos(".")
+    if l:currpos[1] == l:matchpos[1] && l:currpos[2] == l:matchpos[2] 
+	return a:paren
+    endif
+    call setpos(".", l:currpos)
+    return a:paren . s:parenmap[a:paren] . "\<left>"
+endfunction
+
 "TODO: fix escape
+
 function! CommentRegion(l1, l2)
     if exists(s:commentprefix) != 0 || s:commentprefix == ""
         echoerr "Comment prefix not set or empty for current filetype"
@@ -187,8 +224,6 @@ function! UnCommentRegion(l1, l2)
     endif
     exec a:l1 . "," . a:l2 's/^' . escape(s:commentprefix, '/"') . '//'
 endfunction
-
-" Commands
 
 " Change the current tabwidth
 command! -nargs=* Settab call Stab()
@@ -215,3 +250,4 @@ endfunction
 
 ":%s/^\s*/&&/g
 "Use map-operator for custom command with motions
+
