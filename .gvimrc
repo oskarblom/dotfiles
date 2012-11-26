@@ -58,7 +58,6 @@ if has("gui_running")
         set guioptions-=T
         set guioptions-=r
         set guioptions-=L
-        :cd "c:\Users\oskar.blom"
     endif
 
     " Autocommand
@@ -98,7 +97,8 @@ endif
 if has("mac") || has("unix")
     set backupdir=~/.vim/.backup
     set directory=~/.vim/.swap
-elseif has("win32") || has("win32")
+elseif has("win32") || has("win64")
+    cd ~
     set backupdir=~/vimfiles/_backup
     set directory=~/vimfiles/_swap
 endif
@@ -146,7 +146,7 @@ vmap <leader>u :UnCommentReg<CR>
 "onoremap <silent><leader>c :CommentReg<CR>
 "onoremap <silent><leader>u :UnCommentReg<CR>
 
-set listchars=tab:⇒\ ,eol:↵
+set listchars=tab:?\ ,eol:?
 
 " Misc
 set encoding=utf-8
