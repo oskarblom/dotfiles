@@ -90,6 +90,8 @@ if has("autocmd")
     autocmd FileType vim let s:commentprefix = '"'
 
     autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType html let s:commentprefix = '<!--'
+    autocmd FileType html let s:commentsuffix = '-->'
 
     autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
@@ -148,17 +150,21 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+" For finding tag stuff
 nnoremap <leader>to <C-]>
 nnoremap <leader>tl g]
 nnoremap Y y$
 nnoremap D d$
 noremap H ^
 noremap L $
+" Just highlight the word. Don't find next 'till I say so.
 nnoremap * *<C-o>
 vmap <leader>c :CommentReg<CR>
 vmap <leader>u :UnCommentReg<CR>
 " PCRE
 noremap / /\v
+" Sudo trick
+cnoremap w!! %!sudo tee > /dev/null %
 
 " Abbreviations
 
@@ -180,6 +186,8 @@ set backspace=indent,eol,start
 set ttyfast
 set ssop-=options "Don't store setting values in the session
 set noesckeys
+set autoread
+set relativenumber
 
 
 function GetSelection()
@@ -195,13 +203,11 @@ command! -nargs=* -range UnCommentReg call UnCommentRegion(<line1>, <line2>)
 
 " Paren matching
 
-inoremap ( <c-r>=Parenmatch('(')<cr>
-
 let s:parenmap = {'(': ')', '[': ']', '{': '}'}
 
-for p in keys(s:parenmap)
-    exec("inoremap " . p . " \<c-r>=Parenmatch('" . p . "')\<cr>")
-endfor
+"for p in keys(s:parenmap)
+"    exec("inoremap " . p . " \<c-r>=Parenmatch('" . p . "')\<cr>")
+"endfor
 
 function Parenmatch(paren)
     if !has_key(s:parenmap, a:paren)
@@ -219,18 +225,38 @@ endfunction
 
 "TODO: fix escape
 
-function! CommentRegion(l1, l2)
-    if exists(s:commentprefix) != 0 || s:commentprefix == ""
+function! CommentType()
+    if !exists("s:commentprefix") || s:commentprefix == ""
         echoerr "Comment prefix not set or empty for current filetype"
+        return ""
     endif
-    exec a:l1 . "," . a:l2 . 's/^/' . escape(s:commentprefix, '/"')
+    if !exists("s:commentsuffix") || s:commentsuffix == ""
+        return "prefix"
+    else
+        return "surround"
+    endif
+endfunction
+
+function! CommentRegion(l1, l2)
+    let l:commenttype = CommentType()
+    if l:commenttype == ""
+        return
+    elseif l:commenttype == "prefix"
+        exec a:l1 . "," . a:l2 . 's/^/' . escape(s:commentprefix, '/"')
+    elseif l:commenttype == "surround"
+        exec "normal! :" . a:l2 . "\<cr>o" . s:commentsuffix . "\<esc>:" . a:l1 . "\<cr>O" . s:commentprefix
+    endif
 endfunction
 
 function! UnCommentRegion(l1, l2)
-    if exists(s:commentprefix) != 0 || s:commentprefix == ""
-        echoerr "Comment prefix not set or empty for current filetype"
+    let l:commenttype = CommentType()
+    if l:commenttype == ""
+        return
+    elseif l:commenttype == "prefix"
+        exec a:l1 . "," . a:l2 's/^' . escape(s:commentprefix, '/"') . '//'
+    elseif l:commenttype == "surround"
+        exec "normal! :" . a:l2 . "\<cr>o" . s:commentsuffix . "\<esc>:" . a:l1 . "\<cr>O" . s:commentprefix
     endif
-    exec a:l1 . "," . a:l2 's/^' . escape(s:commentprefix, '/"') . '//'
 endfunction
 
 " Change the current tabwidth
@@ -249,6 +275,9 @@ function! ASnippet()
     let l:currft = &ft
     if l:currft != ""
         let l:snippath = $HOME . '/.vim/snippets/' . l:currft . '.snippets'
+"        exec "!file " . l:snippath
+"        let l:filecode = substitute(system("silent !echo $?"), "\n", "")
+"        echom l:filecode
         exec ":e " . l:snippath
         :normal G
     else
