@@ -255,7 +255,8 @@ function! UnCommentRegion(l1, l2)
     elseif l:commenttype == "prefix"
         exec a:l1 . "," . a:l2 's/^' . escape(s:commentprefix, '/"') . '//'
     elseif l:commenttype == "surround"
-        exec "normal! :" . a:l2 . "\<cr>o" . s:commentsuffix . "\<esc>:" . a:l1 . "\<cr>O" . s:commentprefix
+        exec "normal! :" . a:l2 . "\<cr>:g/\s*" . s:commentsuffix . "/d\<cr>"
+        exec "normal! :" . a:l1 . "\<cr>:g/\s*" . s:commentprefix . "/d\<cr>"
     endif
 endfunction
 
