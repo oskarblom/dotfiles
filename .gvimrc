@@ -82,16 +82,16 @@ if has("autocmd")
     autocmd FileType python set makeprg="pylint\ --reports=n\ --output-format=parseable\ %:p"
     autocmd FileType python set omnifunc=pythoncomplete#Complete
     autocmd FileType python set errorformat="%f:%l:\ %m"
-    autocmd FileType python let s:commentprefix = '#'
+    autocmd FileType python let b:commentprefix = '#'
 
     autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType javascript let s:commentprefix = '//'
+    autocmd FileType javascript let b:commentprefix = '//'
 
-    autocmd FileType vim let s:commentprefix = '"'
+    autocmd FileType vim let b:commentprefix = '"'
 
     autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType html let s:commentprefix = '<!--'
-    autocmd FileType html let s:commentsuffix = '-->'
+    autocmd FileType html let b:commentprefix = '<!--'
+    autocmd FileType html let b:commentsuffix = '-->'
 
     autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
@@ -226,11 +226,11 @@ endfunction
 "TODO: fix escape
 
 function! CommentType()
-    if !exists("s:commentprefix") || s:commentprefix == ""
+    if !exists("b:commentprefix") || b:commentprefix == ""
         echoerr "Comment prefix not set or empty for current filetype"
         return ""
     endif
-    if !exists("s:commentsuffix") || s:commentsuffix == ""
+    if !exists("b:commentsuffix") || b:commentsuffix == ""
         return "prefix"
     else
         return "surround"
@@ -242,9 +242,9 @@ function! CommentRegion(l1, l2)
     if l:commenttype == ""
         return
     elseif l:commenttype == "prefix"
-        exec a:l1 . "," . a:l2 . 's/^/' . escape(s:commentprefix, '/"')
+        exec a:l1 . "," . a:l2 . 's/^/' . escape(b:commentprefix, '/"')
     elseif l:commenttype == "surround"
-        exec "normal! :" . a:l2 . "\<cr>o" . s:commentsuffix . "\<esc>:" . a:l1 . "\<cr>O" . s:commentprefix
+        exec "normal! :" . a:l2 . "\<cr>o" . b:commentsuffix . "\<esc>:" . a:l1 . "\<cr>O" . b:commentprefix
     endif
 endfunction
 
@@ -253,9 +253,9 @@ function! UnCommentRegion(l1, l2)
     if l:commenttype == ""
         return
     elseif l:commenttype == "prefix"
-        exec a:l1 . "," . a:l2 's/^' . escape(s:commentprefix, '/"') . '//'
+        exec a:l1 . "," . a:l2 's/^' . escape(b:commentprefix, '/"') . '//'
     elseif l:commenttype == "surround"
-        exec "normal! :" . a:l2 . "\<cr>:s/\\s*" . s:commentsuffix . "\\n//\<cr>" . ":" . a:l1 . "\<cr>:s/\\s*" . s:commentprefix . "\\n//\<cr>"
+        exec "normal! :" . a:l2 . "\<cr>:s/\\s*" . b:commentsuffix . "\\n//\<cr>" . ":" . a:l1 . "\<cr>:s/\\s*" . b:commentprefix . "\\n//\<cr>"
     endif
 endfunction
 
