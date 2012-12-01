@@ -3,6 +3,7 @@ set nocompatible
 
 " Pathogen
 call pathogen#infect()
+" Do this manually when installing a new plugin instead
 "call pathogen#helptags()
 
 " Indentation
@@ -23,7 +24,8 @@ set number
 set ruler
 set scrolloff=7
 set colorcolumn=81
-set laststatus=2   " Always show the statusline
+" Always show the statusline
+set laststatus=2
 set fillchars=vert:‖
 
 " GUI specific
@@ -172,7 +174,6 @@ cnoremap w!! %!sudo tee > /dev/null %
 :cnoreabbrev copen topleft copen
 
 set listchars=tab:⇒\ ,eol:↵
-
 " Misc
 set encoding=utf-8
 set hidden
@@ -190,7 +191,7 @@ set autoread
 set relativenumber
 
 
-function GetSelection()
+function! GetSelection()
     let l:cursorpos = getpos(".")
     let l:startpos = getpos("v")
     let l:endpos = getpos("'>")
@@ -200,6 +201,14 @@ endfunction
 command! -nargs=* -range CommentReg call CommentRegion(<line1>, <line2>)
 command! -nargs=* -range UnCommentReg call UnCommentRegion(<line1>, <line2>)
 
+command! -nargs=* Scratch call ScratchBuffer()
+
+function! ScratchBuffer()
+    let l:hasbuf = bufexists("[Scratch]")
+    if l:hasbuf
+        echom "Scratch buffer exists"
+    endif
+endfunction
 
 " Paren matching
 
@@ -209,7 +218,7 @@ let s:parenmap = {'(': ')', '[': ']', '{': '}'}
 "    exec("inoremap " . p . " \<c-r>=Parenmatch('" . p . "')\<cr>")
 "endfor
 
-function Parenmatch(paren)
+function! Parenmatch(paren)
     if !has_key(s:parenmap, a:paren)
 	return a:paren
     endif
