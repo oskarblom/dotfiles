@@ -105,6 +105,7 @@ if has("autocmd")
     autocmd FileType snippet setlocal softtabstop=8
 
     autocmd GUIEnter * set visualbell t_vb=
+    autocmd Syntax * call HilightTabs()
 endif
 
 " OS
@@ -296,6 +297,12 @@ function! ASnippet()
         echoerr "No filetype associated with current file"
     endif
 endfunction
+
+function! HilightTabs()
+    syntax match Tab /\t/ | highlight Tab gui=underline guifg=blue ctermbg=blue
+endfunction
+
+call HilightTabs()
 
 ":%s/^\s*/&&/g
 "Use map-operator for custom command with motions
