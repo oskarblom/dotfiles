@@ -182,6 +182,7 @@ let python_highlight_all=1
 set shortmess+=I
 set omnifunc=syntaxcomplete#Complete
 set wildmenu
+set wildmode=list:longest,full
 set showcmd
 set backspace=indent,eol,start
 set ttyfast
@@ -205,8 +206,10 @@ command! -nargs=* Scratch call ScratchBuffer()
 
 function! ScratchBuffer()
     let l:hasbuf = bufexists("[Scratch]")
-    if l:hasbuf
-        echom "Scratch buffer exists"
+    if l:hasbuf == 0
+        :e [Scratch] | setlocal buftype=nofile
+    else
+        :buffer \[Scratch]
     endif
 endfunction
 
