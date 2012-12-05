@@ -15,8 +15,9 @@ set autoindent
 filetype indent plugin on
 
 " Looks
-let g:molokai_original=1
+"let g:molokai_original=1
 colorscheme molokai
+"colorscheme solarized
 syntax on
 set cursorline
 set nowrap
@@ -26,7 +27,6 @@ set scrolloff=7
 set colorcolumn=81
 " Always show the statusline
 set laststatus=2
-set fillchars=vert:‖
 
 " GUI specific
 if has("gui_running")
@@ -113,10 +113,13 @@ endif
 if has("mac") || has("unix")
     set backupdir=~/.vim/.backup
     set directory=~/.vim/.swap
+    " This won't fly on windows
+    set fillchars=vert:‖
+    set listchars=tab:⇒\ ,eol:↵
 elseif has("win32") || has("win64")
+    set nobackup
+    set noswapfile
     cd ~
-    set backupdir=~/vimfiles/_backup
-    set directory=~/vimfiles/_swap
 endif
 
 
@@ -174,7 +177,6 @@ cnoremap w!! %!sudo tee > /dev/null %
 "Open the quickfix window on top like everything else.
 :cnoreabbrev copen topleft copen
 
-set listchars=tab:⇒\ ,eol:↵
 " Misc
 set encoding=utf-8
 set hidden
