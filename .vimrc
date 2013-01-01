@@ -167,8 +167,6 @@ noremap L $
 nnoremap * *<C-o>
 vmap <leader>c :CommentReg<CR>
 vmap <leader>u :UnCommentReg<CR>
-" PCRE
-noremap / /\v
 " Sudo trick
 cnoremap w!! %!sudo tee > /dev/null %
 
@@ -192,8 +190,6 @@ set ttyfast
 set ssop-=options "Don't store setting values in the session
 set noesckeys
 set autoread
-set relativenumber
-
 
 function! GetSelection()
     let l:cursorpos = getpos(".")
