@@ -24,7 +24,7 @@ set nowrap
 set number
 set ruler
 set scrolloff=7
-set colorcolumn=81
+set colorcolumn=121
 " Always show the statusline
 set laststatus=2
 

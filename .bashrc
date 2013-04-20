@@ -7,7 +7,7 @@ fi
 alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 alias vi="vim"
 alias grep="grep --color=auto"
-alias less="less -I"
+alias less="less -I -R"
 
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
@@ -34,4 +34,8 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 export WORKON_HOME=~/.virtualenvs
 [[ -s "/usr/local/bin/virtualenvwrapper.sh" ]] && source "/usr/local/bin/virtualenvwrapper.sh"
+#workon mycup
+
+# Locale
+export LC_ALL=sv_SE.UTF-8
 
