@@ -159,12 +159,8 @@ nnoremap <C-l> <C-w>l
 " For finding tag stuff
 nnoremap <leader>to <C-]>
 nnoremap <leader>tl g]
-nnoremap Y y$
-nnoremap D d$
-noremap H ^
-noremap L $
-" Just highlight the word. Don't find next 'till I say so.
-nnoremap * *<C-o>
+"
+inoremap {<cr> {<cr>}<esc>O
 vmap <leader>c :CommentReg<CR>
 vmap <leader>u :UnCommentReg<CR>
 " Sudo trick
@@ -196,6 +192,8 @@ function! GetSelection()
     let l:startpos = getpos("v")
     let l:endpos = getpos("'>")
 endfunction
+
+command! -nargs=* -range Json exec "<line1>,<line2>!python -mjson.tool"
 
 " Comment region
 command! -nargs=* -range CommentReg call CommentRegion(<line1>, <line2>)
