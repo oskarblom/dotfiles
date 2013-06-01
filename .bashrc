@@ -7,7 +7,9 @@ fi
 alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 alias vi="vim"
 alias grep="grep --color=auto"
-alias less="less -I -R"
+alias ll="ls -l"
+alias lla="ls -la"
+export LESS=" -R -I "
 
 export CLICOLOR=1
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
@@ -28,6 +30,10 @@ if [ -f /Users/oskar/opt/django_bash_completion ]; then
     . /Users/oskar/opt/django_bash_completion
 fi
 
+if [ -f /usr/local/bin/src-hilite-lesspipe.sh ]; then
+    export LESSOPEN="| /usr/local/bin/src-hilite-lesspipe.sh %s"
+fi
+
 [[ -s "/Users/oskar/.rvm/scripts/rvm" ]] && source "/Users/oskar/.rvm/scripts/rvm"
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
@@ -39,3 +45,14 @@ export WORKON_HOME=~/.virtualenvs
 # Locale
 export LC_ALL=sv_SE.UTF-8
 
+function getjq {
+    curl -L http://code.jquery.com/jquery-latest.js > jquery.js
+}
+
+function serve {
+    #TODO: Figure out how to also open webpage with open http://localhost:8000 without
+    # putting the server in the background
+    python -mSimpleHTTPServer &
+    open http://localhost:8000;
+    fg
+}

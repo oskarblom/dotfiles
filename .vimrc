@@ -131,6 +131,12 @@ set hlsearch
 set incsearch
 set showmatch
 
+let mapleader = ","
+
+" Syntastic
+let g:syntastic_mode_map = { "mode": "passive" }
+nnoremap <leader>s :SyntasticCheck<CR>
+
 " Nerdtree
 
 let NERDTreeDirArrows=1
@@ -149,7 +155,6 @@ let Tlist_Inc_Winwidth = 0
 " Mappings
 
 set timeoutlen=5000
-let mapleader = ","
 map <F7> :TlistToggle<CR>
 "Window movement
 nnoremap <C-j> <C-w>j
@@ -159,6 +164,7 @@ nnoremap <C-l> <C-w>l
 " For finding tag stuff
 nnoremap <leader>to <C-]>
 nnoremap <leader>tl g]
+nnoremap <leader>: :silent 
 "
 inoremap {<cr> {<cr>}<esc>O
 vmap <leader>c :CommentReg<CR>
@@ -212,7 +218,7 @@ endfunction
 
 " Paren matching
 
-let s:parenmap = {'(': ')', '[': ']', '{': '}'}
+"let s:parenmap = {'(': ')', '[': ']', '{': '}'}
 
 "for p in keys(s:parenmap)
 "    exec("inoremap " . p . " \<c-r>=Parenmatch('" . p . "')\<cr>")
