@@ -56,3 +56,6 @@ function serve {
     open http://localhost:8000;
     fg
 }
+
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages:/Users/oskar/Code/Python/pyutil:$PYTHONPATH
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home
