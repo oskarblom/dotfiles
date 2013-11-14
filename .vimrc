@@ -14,6 +14,7 @@ set expandtab
 set autoindent
 filetype indent plugin on
 
+
 " Looks
 "let g:molokai_original=1
 colorscheme molokai
@@ -24,7 +25,7 @@ set nowrap
 set number
 set ruler
 set scrolloff=7
-set colorcolumn=121
+set colorcolumn=80
 " Always show the statusline
 set laststatus=2
 
@@ -67,8 +68,7 @@ if has("gui_running")
     " Disable sound and bell
     set vb t_vb=
 else
-    let s:term = $TERM
-    if $TERM == "xterm-256color"
+    if $TERM == "xterm-256color" || $TERM == "screen"
         set t_Co=256
     else
         set t_Co=8
@@ -105,7 +105,6 @@ if has("autocmd")
     autocmd FileType snippet setlocal softtabstop=8
 
     autocmd GUIEnter * set visualbell t_vb=
-    autocmd Syntax * call HilightTabs()
 endif
 
 " OS
@@ -300,12 +299,11 @@ function! ASnippet()
     endif
 endfunction
 
-function! HilightTabs()
-    syntax match Tab /\t/ | highlight Tab gui=underline guifg=blue ctermbg=blue
+function! Debug() range
+    echo a:firstline
 endfunction
 
-call HilightTabs()
 
 ":%s/^\s*/&&/g
 "Use map-operator for custom command with motions
-
+"set wildignore=*/
