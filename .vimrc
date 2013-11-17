@@ -18,7 +18,7 @@ filetype indent plugin on
 " Looks
 "let g:molokai_original=1
 colorscheme molokai
-"colorscheme solarized
+
 syntax on
 set cursorline
 set nowrap
