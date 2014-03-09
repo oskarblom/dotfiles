@@ -110,16 +110,15 @@ endif
 " OS
 
 if has("mac") || has("unix")
-    set backupdir=~/.vim/.backup
-    set directory=~/.vim/.swap
     " This won't fly on windows
     set fillchars=vert:‖
     set listchars=tab:⇒\ ,eol:↵
 elseif has("win32") || has("win64")
-    set nobackup
-    set noswapfile
     cd ~
 endif
+
+set nobackup
+set noswapfile
 
 
 " Search
