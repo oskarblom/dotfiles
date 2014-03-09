@@ -30,10 +30,6 @@ if [ -f /Users/oskar/opt/django_bash_completion ]; then
     . /Users/oskar/opt/django_bash_completion
 fi
 
-if [ -f /usr/local/bin/src-hilite-lesspipe.sh ]; then
-    export LESSOPEN="| /usr/local/bin/src-hilite-lesspipe.sh %s"
-fi
-
 [[ -s "/Users/oskar/.rvm/scripts/rvm" ]] && source "/Users/oskar/.rvm/scripts/rvm"
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
