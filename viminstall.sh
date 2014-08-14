@@ -21,6 +21,10 @@ DOT_DIR=$(cd $(dirname $0) && pwd)
 AUTOLOAD_DIR="${DOT_DIR}/.vim/autoload"
 BUNDLE_DIR="${DOT_DIR}/.vim/bundle"
 
+for dir in $AUTOLOAD_DIR $BUNDLE_DIR; do
+    mkdir -p $dir
+done
+
 for key in ${!GIT_PLUGINS[@]}; do
     echo "$key"
 done
