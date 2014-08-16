@@ -17,7 +17,6 @@ filetype indent plugin on
 
 " Looks
 "let g:molokai_original=1
-colorscheme molokai
 
 syntax on
 set cursorline
@@ -28,6 +27,7 @@ set scrolloff=7
 set colorcolumn=80
 " Always show the statusline
 set laststatus=2
+colorscheme molokai
 
 " GUI specific
 if has("gui_running")
@@ -68,9 +68,10 @@ if has("gui_running")
     " Disable sound and bell
     set vb t_vb=
 else
-    if $TERM == "xterm-256color" || $TERM == "screen"
+    if $TERM == "xterm" || $TERM == "xterm-256color" || $TERM == "screen"
         set t_Co=256
     else
+	colorscheme default
         set t_Co=8
     endif
     " Disable sound and bell
