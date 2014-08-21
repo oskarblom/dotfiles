@@ -17,7 +17,7 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 
 #export PS1="\u@\h:\w\$ "
 export PS1="\[\033[38;5;110m\]\u\[\033[0m\]@\[\033[38;5;192m\]\h\[\033[0m\]:\[\033[38;5;208m\]\w\[\033[0m\]\$ "
-export ARCHFLAGS="-arch x86_64"
+export ARCHFLAGS="-arch x86_64 -Wno-error=unused-command-line-argument-hard-error-in-future"
 
 export EDITOR="vim"
 
@@ -55,3 +55,9 @@ function serve {
 
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:/Users/oskar/Code/Python/pyutil:$PYTHONPATH
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home
+export GOROOT=$HOME/opt/go
+
+if [ -z "$SSH_AUTH_SOCK" ]; then
+    eval `ssh-agent -s`
+ssh-add
+fi
