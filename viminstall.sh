@@ -15,6 +15,7 @@ GIT_PLUGINS=(
     [molokai]="https://github.com/tomasr/molokai.git"
     [vim-javascript]="https://github.com/pangloss/vim-javascript.git"
     [vim-markdown]="https://github.com/tpope/vim-markdown.git"
+    [vim-jsx]="https://github.com/mxw/vim-jsx.git"
 )
 
 DOT_DIR=$(cd $(dirname $0) && pwd)
