@@ -23,7 +23,7 @@ AUTOLOAD_DIR="${DOT_DIR}/.vim/autoload"
 BUNDLE_DIR="${DOT_DIR}/.vim/bundle"
 
 for dir in ${AUTOLOAD_DIR} ${BUNDLE_DIR}; do
-    mkdir $dir
+    mkdir $dir 2>/dev/null
     rm -rf ${dir}/*
 done
 for key in ${!GIT_PLUGINS[@]}; do
