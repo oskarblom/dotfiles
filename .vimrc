@@ -24,7 +24,9 @@ set nowrap
 set number
 set ruler
 set scrolloff=7
-set colorcolumn=80
+if exists("&colorcolumn")
+    set colorcolumn=80
+endif
 " Always show the statusline
 set laststatus=2
 colorscheme molokai
