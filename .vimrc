@@ -2,7 +2,17 @@
 set nocompatible 
 " Pathogen 
 call pathogen#infect() 
-" Do this manually when installing a new plugin instead "call pathogen#helptags() " Indentation set tabstop=8 set softtabstop=4 set shiftwidth=4 set expandtab set autoindent filetype indent plugin on " Looks "let g:molokai_original=1 syntax on
+" Do this manually when installing a new plugin instead "call pathogen#helptags() 
+" Indentation 
+set tabstop=8 
+set softtabstop=4 
+set shiftwidth=4 
+set expandtab 
+set autoindent 
+filetype indent plugin on 
+" Looks 
+"let g:molokai_original=1 
+syntax on
 set cursorline
 set nowrap
 set number
