@@ -1,24 +1,8 @@
-﻿" Should be first
-set nocompatible
-
-" Pathogen
-call pathogen#infect()
-" Do this manually when installing a new plugin instead
-"call pathogen#helptags()
-
-" Indentation
-set tabstop=8
-set softtabstop=4
-set shiftwidth=4
-set expandtab
-set autoindent
-filetype indent plugin on
-
-
-" Looks
-"let g:molokai_original=1
-
-syntax on
+" Should be first
+set nocompatible 
+" Pathogen 
+call pathogen#infect() 
+" Do this manually when installing a new plugin instead "call pathogen#helptags() " Indentation set tabstop=8 set softtabstop=4 set shiftwidth=4 set expandtab set autoindent filetype indent plugin on " Looks "let g:molokai_original=1 syntax on
 set cursorline
 set nowrap
 set number
@@ -29,17 +13,18 @@ if exists("&colorcolumn")
 endif
 " Always show the statusline
 set laststatus=2
-colorscheme molokai
 
 " GUI specific
 if has("gui_running")
     " Linux
     if has("gui_gtk2")
+        colorscheme molokai
         set guifont=Monospace\ 10
         set columns=100
         set lines=30
     " Windows
     elseif has("gui_macvim")
+        colorscheme molokai
         set guioptions=egmrt
         set guifont=Monaco:h14
         set columns=130
@@ -57,6 +42,7 @@ if has("gui_running")
         noremap <D-S-left> gT
     else
         " Win
+        colorscheme solarized
         set columns=140
         set lines=36
         set guifont=Consolas:h13
@@ -285,21 +271,21 @@ function! Stab()
     endif
 endfunction
 
-" Add a custom snippet for the current filetype
-command! -nargs=* AddSnippet call ASnippet()
-function! ASnippet()
-    let l:currft = &ft
-    if l:currft != ""
-        let l:snippath = $HOME . '/.vim/snippets/' . l:currft . '.snippets'
-"        exec "!file " . l:snippath
-"        let l:filecode = substitute(system("silent !echo $?"), "\n", "")
-"        echom l:filecode
-        exec ":e " . l:snippath
-        :normal G
-    else
-        echoerr "No filetype associated with current file"
-    endif
-endfunction
+"" Add a custom snippet for the current filetype
+"command! -nargs=* AddSnippet call ASnippet()
+"function! ASnippet()
+"    let l:currft = &ft
+"    if l:currft != ""
+"        let l:snippath = $HOME . '/.vim/snippets/' . l:currft . '.snippets'
+""        exec "!file " . l:snippath
+""        let l:filecode = substitute(system("silent !echo $?"), "\n", "")
+""        echom l:filecode
+"        exec ":e " . l:snippath
+"        :normal G
+"    else
+"        echoerr "No filetype associated with current file"
+"    endif
+"endfunction
 
 function! Debug() range
     echo a:firstline
